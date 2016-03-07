@@ -12,9 +12,22 @@
     <script type="text/javascript" src="js/bootstrap.3.3.6.min.js"></script>
 
 </head>
-<body>
-    <div class="container" data-ng-controller="MainCtrl">
-        <h1>Hello {{title}}</h1>
+<body data-ng-controller="MainCtrl">
+
+	<!-- NAVIGATION -->
+	<nav class="navbar	" role="navigation">
+	    <div class="navbar-header">
+	        <a class="navbar-brand" data-ui-sref="lights">{{title}}</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	        <li><a data-ui-sref="lights">Lights</a></li>
+	        <li><a data-ui-sref="devices">Devices</a></li>
+	    </ul>
+	</nav>
+
+	<!-- MAIN CONTENT -->
+    <div class="container">
+        <div data-ui-view></div>
     </div>
 
     <script type="text/javascript" src="js/angular.1.4.0.js"></script>
