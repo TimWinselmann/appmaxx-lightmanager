@@ -4,29 +4,50 @@
     <title>Lightmanager</title>
 
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="css/bootstrap.3.3.6.min.css" />
-
-    <script type="text/javascript" src="js/jquery.1.12.0.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.3.3.6.min.js"></script>
+    <link rel="stylesheet" href="css/lightmanager.css" />
+    <link rel="stylesheet" href="font-awesome-4.5.0/css/font-awesome.min.css" />
 
 </head>
 <body data-ng-controller="MainCtrl">
 
 	<!-- NAVIGATION -->
-	<nav class="navbar" role="navigation">
-	    <div class="navbar-header">
-	        <a class="navbar-brand" data-ui-sref="lights">{{title}}</a>
+	<nav class="navbar navbar-default navbar-static-top" role="navigation">
+		<div class="container">
+		    <div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+		        <a class="navbar-brand" data-ui-sref="lights">
+		        	<i class="fa fa-home fa-fw"></i>&nbsp;{{title}}
+	        	</a>
+		    </div>
+		    <div id="navbar" class="navbar-collapse collapse">
+			    <ul class="nav navbar-nav navbar-right">
+			    	<!-- TODO add class active to parent -->
+			        <li data-ui-sref-active="active">
+			        	<a data-ui-sref="lights">
+			        		<i class="fa fa-lightbulb-o"></i>&nbsp;Lights
+		        		</a>
+		        	</li>
+			        <li data-ui-sref-active="active">
+			        	<a data-ui-sref="devices">
+			        		<i class="fa fa-television"></i>&nbsp;Devices
+			        	</a>
+		        	</li>
+			    </ul>
+		    </div>
 	    </div>
-	    <ul class="nav navbar-nav">
-	        <li><a data-ui-sref="lights">Lights</a></li>
-	        <li><a data-ui-sref="devices">Devices</a></li>
-	    </ul>
 	</nav>
 
 	<!-- MAIN CONTENT -->
-    <div class="container">
+    <div class="container" data-ng-swipe-left="swiped();" data-ng-swipe-right="swiped();">
         <div data-ui-view></div>
     </div>
 
@@ -34,6 +55,9 @@
     <script type="text/javascript" src="js/angular-animate.1.4.0.js"></script>
     <script type="text/javascript" src="js/angular-route.1.4.0.js"></script>
     <script type="text/javascript" src="js/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="js/angular-touch.1.4.0.js"></script>
+    <script type="text/javascript" src="js/jquery.1.12.0.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.3.3.6.min.js"></script>
     <script type="text/javascript" src="js/lightmanager.js"></script>
 </body>
 </html>

@@ -1,10 +1,20 @@
-var lightmanager = angular.module('lightmanager', ['ui.router']);
+var lightmanager = angular.module('lightmanager', ['ui.router', 'ngTouch']);
 
-lightmanager.controller('MainCtrl',
-	function($scope) {
+lightmanager.controller('MainCtrl', ['$scope', '$state',
+	function($scope, $state) {
 		$scope.title = 'Lightmanager';
+		
+		$scope.swiped = function (left) {
+			// FIXME Ugly hack to make swiping between views available.
+			// Should be something like ui.router state next.
+			if ($state.$current.self.name == 'lights') {
+				$state.go('devices');
+			} else {
+				$state.go('lights');
+			}
+		}
 	}
-);
+]);
 
 lightmanager.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider',
     function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
@@ -26,10 +36,20 @@ lightmanager.config(['$stateProvider', '$urlRouterProvider', '$locationProvider'
 	}
 ]);
 
-lightmanager.controller('LightsCtrl', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
-	$scope.title  = 'Lights!';
-}]);
+lightmanager.controller('LightsCtrl', ['$rootScope', '$scope', '$state',
+   function($rootScope, $scope, $state) {
+		$scope.title  = 'Lights!';
+	}
+]);
 
-lightmanager.controller('DevicesCtrl', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
-	$scope.title  = 'Devices!';
-}]);
+lightmanager.controller('DevicesCtrl', ['$rootScope', '$scope', '$state',
+    function($rootScope, $scope, $state) {
+		$scope.title  = 'Devices!';
+	}
+]);
+
+$(document).on('click','.navbar-collapse.in',function(e) {
+    if( $(e.target).is('a') ) {
+        $(this).collapse('hide');
+    }
+});
