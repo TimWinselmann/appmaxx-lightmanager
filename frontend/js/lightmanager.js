@@ -12,6 +12,9 @@ lightmanager.controller('MainCtrl', ['$scope', '$state',
 			} else {
 				$state.go('lights');
 			}
+			
+			console.log($('#navLights'));
+			$('#navLights').collapse('hide');;
 		}
 	}
 ]);
