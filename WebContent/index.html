@@ -24,7 +24,7 @@
 		<div data-ng-controller="HeaderCtrl">
 			<h3>HeaderCtrl</h3>
 
-			<p>{{value.userId}} is logged in.</p>
+			<p data-ng-if="value.userId">UserId: {{value.userId}}</p>
 		</div>
 
 		<div data-ng-controller="LoginCtrl">
@@ -36,7 +36,13 @@
 					type="submit" value="Login">
 			</form>
 
-			<p>{{value.userId}} is logged in.</p>
+			<p data-ng-if="value.userId">{{value.userId}} is logged in.</p>
+		</div>
+		
+		<div data-ng-controller="FooterCtrl">
+			<h3>FooterCtrl</h3>
+
+			<p data-ng-if="value" >UserId: {{value.userId}}   |   CreatedAt: {{value.createdAt}}</p>
 		</div>
 	</div>
 
@@ -50,6 +56,7 @@
 	<script src="js/loginCtrl.js"></script>
 	<script src="js/headerCtrl.js"></script>
 	<script src="js/errorCtrl.js"></script>
+	<script src="js/footerCtrl.js"></script>
 	<script src="js/appmaxxService.js"></script>
 </body>
 </html>

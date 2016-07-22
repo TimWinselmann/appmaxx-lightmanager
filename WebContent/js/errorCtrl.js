@@ -9,11 +9,11 @@ lightmanager.controller("ErrorCtrl", [ "$scope", "$log", "$timeout", function($s
 		if (value && (value.message && value.description && value.statusCode)) {
 			errorMessage = value.description + ' (' + value.statusCode + ' ' + value.message + ')';
 		} else {
-			// TODO handle error without data
-			errorMessage = 'An unexpected error occurred: ' + rejection.status;
+			errorMessage = 'An unexpected error occurred: ' + value.status + ' ' + value.statusText
+			    + '. Please see the browser console for more information.';
 		}
 
-		$log.debug('Error: ' + errorMessage);
+		$log.error('Error: ' + errorMessage);
 
 		$scope.errorMessage = errorMessage;
 

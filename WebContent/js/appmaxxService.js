@@ -29,7 +29,7 @@ lightmanager.factory("AppmaxxService", [ "$rootScope", "$http", "$log", function
 				$log.info(loginData.userId + " has logged in.");
 				$rootScope.$broadcast('login.data', loginData);
 			}, function(response) {
-				$rootScope.$broadcast('error.message', response.data);
+				$rootScope.$broadcast('error.message', response);
 			}).finally(function() {
 				 credentials.userId = '';
 				 credentials.password = '';

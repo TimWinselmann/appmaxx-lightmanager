@@ -6,8 +6,4 @@ lightmanager.controller("LoginCtrl", [ "$scope", "$http", "AppmaxxService", func
 		AppmaxxService.login(credentials);
 	}
 
-	$scope.$on('login.data', function(event, value) {
-		$scope.value = value;
-	});
-
 } ]);
