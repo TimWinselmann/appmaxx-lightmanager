@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html data-ng-app="lightmanagerApp">
+<head>
+<title>AppmaxxLightmanager</title>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+
+</head>
+<body class="ng-cloak">
+
+	<div class="container">
+
+		<!-- ERROR VISUALISATION -->
+		<div class="alert alert-danger fade in" data-ng-controller="ErrorCtrl"
+			data-ng-show="errorMessage">
+			<strong>Error!</strong> {{errorMessage}}
+		</div>
+
+		<div data-ng-controller="HeaderCtrl">
+			<h3>HeaderCtrl</h3>
+
+			<p>{{value.userId}} is logged in.</p>
+		</div>
+
+		<div data-ng-controller="LoginCtrl">
+			<h3>LoginCtrl</h3>
+
+			<form data-ng-submit="login(credentials)">
+				<input type="text" data-ng-model="credentials.userId"> <input
+					type="password" data-ng-model="credentials.password"> <input
+					type="submit" value="Login">
+			</form>
+
+			<p>{{value.userId}} is logged in.</p>
+		</div>
+	</div>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/loginCtrl.js"></script>
+	<script src="js/headerCtrl.js"></script>
+	<script src="js/errorCtrl.js"></script>
+	<script src="js/appmaxxService.js"></script>
+</body>
+</html>

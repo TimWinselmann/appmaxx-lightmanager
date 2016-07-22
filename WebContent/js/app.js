@@ -1,0 +1,1 @@
+var lightmanager = angular.module('lightmanagerApp', []);
