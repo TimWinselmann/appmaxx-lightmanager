@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<div>
+	<h3>LoginCtrl</h3>
+
+	<form data-ng-submit="login(credentials)">
+		<input type="text" data-ng-model="credentials.userId" />
+		<input type="password" data-ng-model="credentials.password" />
+		<input type="submit" value="Login" />
+	</form>
+
+	<p data-ng-if="value.userId">{{value.userId}} is logged in.</p>
+</div>
