@@ -9,6 +9,7 @@ lightmanager.controller("ErrorCtrl", [ "$scope", "$log", "$timeout", function($s
 		if (value && value.data) {
 			var response = value.data;
 			if (response.message && response.description && response.statusCode) {
+				/* got a server side error message */
 				errorMessage = response.description + ' (' + response.statusCode + ' ' + response.message + ')';
 			}
 		}
@@ -16,7 +17,7 @@ lightmanager.controller("ErrorCtrl", [ "$scope", "$log", "$timeout", function($s
 		/* build general error message if we haven't one yet */
 		if (!errorMessage) {
 			errorMessage = 'An unexpected error occurred: ' + value.status + ' ' + value.statusText
-		    	+ '. Please see the browser console for more information.';
+		    	+ '. Please see the browser console for more information: ' + value.data;
 		}
 
 		$log.error('Error: ' + errorMessage);

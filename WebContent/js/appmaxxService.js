@@ -4,9 +4,11 @@ lightmanager.factory("AppmaxxService", [ "$rootScope", "$http", "$log", function
 
 	var loginData = {
 		userId : '',
-		authToken : '',
+		token : '',
 		createdAt : ''
 	};
+	
+	var httpAuthConfig;
 
 	function isEmpty(str) {
 		return (!str || 0 === str.length);
@@ -23,17 +25,20 @@ lightmanager.factory("AppmaxxService", [ "$rootScope", "$http", "$log", function
 			return isEmpty(data.authToken);
 		},
 		login : function(credentials) {
-			$http.post("https://appmaxx.selfhost.eu:32011/AppmaxxRESTService/rest/token", credentials).then(function(response) {
-				loginData = response.data;
-
-				$log.info(loginData.userId + " has logged in.");
-				$rootScope.$broadcast('login.data', loginData);
-			}, function(response) {
-				$rootScope.$broadcast('error.message', response);
-			}).finally(function() {
-				 credentials.userId = '';
-				 credentials.password = '';
-			});
+			return $http.post("https://appmaxx.selfhost.eu:32011/AppmaxxRESTService/rest/token", credentials);
+		},
+        setUserData(userData) {
+			loginData = userData;
+			
+			/* TODO save authentication token in persistent storage */
+			httpAuthConfig = {
+				headers:  {
+					'X-Auth-Token' : userData.token
+				}
+			};
+		},
+		getRooms : function() {
+			return $http.get("https://appmaxx.selfhost.eu:32011/AppmaxxRESTService/rest/room", httpAuthConfig);
 		}
 	};
 } ]);

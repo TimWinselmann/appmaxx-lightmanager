@@ -1,6 +1,6 @@
 var lightmanager = angular.module('lightmanagerApp', [ 'ui.router' ]);
 
-lightmanager.config([ "$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
+lightmanager.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
 
 	$stateProvider.state('root', {
 		url : '',
@@ -32,6 +32,19 @@ lightmanager.config([ "$stateProvider", "$urlRouterProvider", function($statePro
 		authenticate : false
 	});
 
+	$stateProvider.state('lights', {
+		url : '/lights',
+		views : {
+			'content@' : {
+				templateUrl : 'partials/lights.html',
+				controller : 'LightsCtrl'
+			}
+		},
+		parent : 'root',
+		authenticate : true
+	});
+	
+	
 	$urlRouterProvider.otherwise('/login');
-
+	
 } ]);
