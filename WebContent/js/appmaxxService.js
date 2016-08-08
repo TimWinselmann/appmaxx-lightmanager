@@ -1,5 +1,7 @@
 var lightmanager = angular.module('lightmanagerApp');
 
+var LS_TOKEN = 'LS_TOKEN';
+
 lightmanager.factory("AppmaxxService", [ "$rootScope", "$http", "$log", function($rootScope, $http, $log) {
 
 	var loginData = {
@@ -8,7 +10,11 @@ lightmanager.factory("AppmaxxService", [ "$rootScope", "$http", "$log", function
 		createdAt : ''
 	};
 	
+	var savedToken = localStorage.getItem(LS_TOKEN);
 	var httpAuthConfig;
+	if (savedToken) {
+		httpAuthConfig = JSON.parse(savedToken);
+	}
 
 	function isEmpty(str) {
 		return (!str || 0 === str.length);
@@ -30,12 +36,13 @@ lightmanager.factory("AppmaxxService", [ "$rootScope", "$http", "$log", function
         setUserData(userData) {
 			loginData = userData;
 			
-			/* TODO save authentication token in persistent storage */
 			httpAuthConfig = {
 				headers:  {
 					'X-Auth-Token' : userData.token
 				}
 			};
+			/* TODO save authentication token in cookie storage */
+			localStorage.setItem(LS_TOKEN, JSON.stringify(httpAuthConfig));
 		},
 		getRooms : function() {
 			return $http.get("https://appmaxx.selfhost.eu:32011/AppmaxxRESTService/rest/room", httpAuthConfig);
