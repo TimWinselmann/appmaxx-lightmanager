@@ -12,6 +12,9 @@ lightmanager.controller("LightsCtrl", [ "$rootScope", "$scope", "AppmaxxService"
 			$rootScope.$broadcast('error.message', response);
 		});
 	}
-	init();
+	
+	$scope.$on('$stateChangeSuccess', function () {
+		init();
+	});
 	
 } ]);

@@ -1,8 +1,8 @@
 var lightmanager = angular.module('lightmanagerApp');
 
-var LS_TOKEN = 'LS_TOKEN';
+var X_AUTH_TOKEN = 'X_AUTH_TOKEN';
 
-lightmanager.factory("AppmaxxService", [ "$rootScope", "$http", "$log", function($rootScope, $http, $log) {
+lightmanager.factory("AppmaxxService", [ "$rootScope", "$http", "$cookies", "$log", function($rootScope, $http, $cookies, $log) {
 
 	var loginData = {
 		userId : '',
@@ -10,12 +10,8 @@ lightmanager.factory("AppmaxxService", [ "$rootScope", "$http", "$log", function
 		createdAt : ''
 	};
 	
-	var savedToken = localStorage.getItem(LS_TOKEN);
-	var httpAuthConfig;
-	if (savedToken) {
-		httpAuthConfig = JSON.parse(savedToken);
-	}
-
+	var httpAuthConfig = $cookies.getObject(X_AUTH_TOKEN);
+	
 	function isEmpty(str) {
 		return (!str || 0 === str.length);
 	}
@@ -24,14 +20,18 @@ lightmanager.factory("AppmaxxService", [ "$rootScope", "$http", "$log", function
 		getUsername : function() {
 			return data.username;
 		},
-		getAuthToken : function() {
-			return data.authToken;
-		},
+//		getAuthToken : function() {
+//			return data.authToken;
+//		},
 		isLoggedIn : function() {
-			return isEmpty(data.authToken);
+			return httpAuthConfig != undefined;
 		},
 		login : function(credentials) {
 			return $http.post("https://appmaxx.selfhost.eu:32011/AppmaxxRESTService/rest/token", credentials);
+		},
+		logout : function() {
+			httpAuthConfig = undefined;
+			$cookies.remove(X_AUTH_TOKEN);
 		},
         setUserData(userData) {
 			loginData = userData;
@@ -41,8 +41,7 @@ lightmanager.factory("AppmaxxService", [ "$rootScope", "$http", "$log", function
 					'X-Auth-Token' : userData.token
 				}
 			};
-			/* TODO save authentication token in cookie storage */
-			localStorage.setItem(LS_TOKEN, JSON.stringify(httpAuthConfig));
+			$cookies.putObject(X_AUTH_TOKEN, httpAuthConfig); 
 		},
 		getRooms : function() {
 			return $http.get("https://appmaxx.selfhost.eu:32011/AppmaxxRESTService/rest/room", httpAuthConfig);

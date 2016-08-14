@@ -1,4 +1,4 @@
-var lightmanager = angular.module('lightmanagerApp', [ 'ui.router' ]);
+var lightmanager = angular.module('lightmanagerApp', [ 'ui.router', 'ngCookies' ]);
 
 lightmanager.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
 
@@ -48,19 +48,20 @@ lightmanager.config(["$stateProvider", "$urlRouterProvider", function($stateProv
 	
 } ]);
 
-// TODO TW check login state on location change and redirect to login page if not logged in
-//lightmanager.run(['$rootScope', '$location', '$cookieStore', '$http',
-//    function ($rootScope, $location, $cookieStore, $http) {
-//        // keep user logged in after page refresh
-//        $rootScope.globals = $cookieStore.get('globals') || {};
+lightmanager.run(['$rootScope', '$location', '$cookieStore', '$http', '$state', 'AppmaxxService', '$log',
+    function ($rootScope, $location, $cookieStore, $http, $state, AppmaxxService, $log) {
+//        //TODO keep user logged in after page refresh
+//        $rootScope.globals = $cookies.get('globals') || {};
 //        if ($rootScope.globals.currentUser) {
 //            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
 //        }
-//  
-//        $rootScope.$on('$locationChangeStart', function (event, next, current) {
-//            // redirect to login page if not logged in
-//            if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
-//                $location.path('/login');
-//            }
-//        });
+
+        $rootScope.$on('$stateChangeStart', function (event, next, current) {
+            // redirect to login page if not logged in
+            if (next.name !== 'login' && !AppmaxxService.isLoggedIn()) {
+            	event.preventDefault();
+            	$log.debug('Access to restricted state \'' + next.name + '\', redirecting to login page');
+            	$state.go('login');
+            }
+        });
     }]);
