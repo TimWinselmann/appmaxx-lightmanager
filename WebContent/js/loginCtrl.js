@@ -10,7 +10,7 @@ lightmanager.controller("LoginCtrl", [ "$rootScope", "$scope", "$state", "Appmax
 				AppmaxxService.setUserData(response.data);
 				
 				$log.info(response.data.userId + " has logged in.");
-				$rootScope.$broadcast('login.data', response.data);
+				$rootScope.$broadcast('user-loogin', response.data);
 
 				$state.go('lights');
 			} else {
