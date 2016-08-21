@@ -3,5 +3,13 @@
 <div>
 	<h3>LightsCtrl</h3>
 	
-	<p data-ng-repeat="room in rooms">{{room.name}}</p>
+	<div data-ng-repeat="room in rooms | orderBy : 'name'">
+		{{room.name}}
+		
+		<div data-ng-repeat="light in lights | filter: light.room.name = room.name">
+			- {{light.name}}
+		</div>
+		
+	</div>
+	
 </div>

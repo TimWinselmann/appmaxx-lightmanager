@@ -20,9 +20,6 @@ lightmanager.factory("AppmaxxService", [ "$rootScope", "$http", "$cookies", "$lo
 		getUsername : function() {
 			return data.username;
 		},
-//		getAuthToken : function() {
-//			return data.authToken;
-//		},
 		isLoggedIn : function() {
 			return httpAuthConfig != undefined;
 		},
@@ -45,6 +42,9 @@ lightmanager.factory("AppmaxxService", [ "$rootScope", "$http", "$cookies", "$lo
 		},
 		getRooms : function() {
 			return $http.get("https://appmaxx.selfhost.eu:32011/AppmaxxRESTService/rest/room", httpAuthConfig);
+		},
+		getLights : function() {
+			return $http.get("https://appmaxx.selfhost.eu:32011/AppmaxxRESTService/rest/lights", httpAuthConfig);
 		}
 	};
 } ]);
