@@ -9,9 +9,6 @@ lightmanager.controller("LoginCtrl", [ "$rootScope", "$scope", "$state", "Appmax
 				/* got an authentication token, save it */
 				AppmaxxService.setUserData(response.data);
 				
-				$log.info(response.data.userId + " has logged in.");
-				$rootScope.$broadcast('user-loogin', response.data);
-
 				$state.go('lights');
 			} else {
 				/* response does not contain authentication token... */

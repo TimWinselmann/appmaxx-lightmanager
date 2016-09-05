@@ -4,14 +4,17 @@ var X_AUTH_TOKEN = 'X_AUTH_TOKEN';
 
 lightmanager.factory("AppmaxxService", [ "$rootScope", "$http", "$cookies", "$log", function($rootScope, $http, $cookies, $log) {
 
-	var loginData = {
-		userId : '',
-		token : '',
-		createdAt : ''
-	};
-	
-	var httpAuthConfig = $cookies.getObject(X_AUTH_TOKEN);
-	
+	var userData = $cookies.getObject(X_AUTH_TOKEN);
+	if (userData != undefined) {
+		var httpAuthConfig = {
+				headers:  {
+					'X-Auth-Token' : userData.token
+				}
+		};
+		/* TODO TW broadcast triggers before footer controller registers listener */
+		$rootScope.$broadcast('user-loogin', userData);
+	}
+
 	function isEmpty(str) {
 		return (!str || 0 === str.length);
 	}
@@ -31,20 +34,41 @@ lightmanager.factory("AppmaxxService", [ "$rootScope", "$http", "$cookies", "$lo
 			$cookies.remove(X_AUTH_TOKEN);
 		},
         setUserData(userData) {
-			loginData = userData;
-			
+			$cookies.putObject(X_AUTH_TOKEN, userData);
+
 			httpAuthConfig = {
 				headers:  {
 					'X-Auth-Token' : userData.token
 				}
 			};
-			$cookies.putObject(X_AUTH_TOKEN, httpAuthConfig); 
+
+			$log.info(userData.userId + " has logged in.");
+			$rootScope.$broadcast('user-loogin', userData);
 		},
 		getRooms : function() {
 			return $http.get("https://appmaxx.selfhost.eu:32011/AppmaxxRESTService/rest/room", httpAuthConfig);
 		},
 		getLights : function() {
 			return $http.get("https://appmaxx.selfhost.eu:32011/AppmaxxRESTService/rest/lights", httpAuthConfig);
+		},
+		getDevices : function() {
+			return $http.get("https://appmaxx.selfhost.eu:32011/AppmaxxRESTService/rest/devices", httpAuthConfig);
+		},
+		getMotors : function() {
+			return $http.get("https://appmaxx.selfhost.eu:32011/AppmaxxRESTService/rest/motors", httpAuthConfig);
+		},
+		getScenes : function() {
+			return $http.get("https://appmaxx.selfhost.eu:32011/AppmaxxRESTService/rest/scenes", httpAuthConfig);
+		},
+		toggleLight : function(light) {
+			/* toggle switch state */
+			light.state = !light.state;
+			return $http.post("https://appmaxx.selfhost.eu:32011/AppmaxxRESTService/rest/lights", light, httpAuthConfig);
+		},
+		toggleScene : function(scene) {
+			/* toggle switch state */
+			scene.state = !scene.state;
+			return $http.post("https://appmaxx.selfhost.eu:32011/AppmaxxRESTService/rest/scenes", scene, httpAuthConfig);
 		}
 	};
 } ]);

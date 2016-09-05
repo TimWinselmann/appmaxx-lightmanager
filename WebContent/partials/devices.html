@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<div class="col-xs-12 col-sm-4" data-ng-repeat="room in rooms | orderBy : 'name'">
+
+	<div class="panel panel-default" data-ng-if="(devices | filter: device.room.name = room.name).length > 0">
+	
+		<div class="panel-heading">
+			<b>{{room.name}}</b>
+			<div style="float: right;">
+				<span class="badge">{{(devices | filter: device.room.name = room.name).length}}</span>
+			</div>
+		</div>
+	
+		<table class="table">
+			<tr class="switch-table-row" 
+			    data-ng-repeat="device in devices | filter: device.room.name = room.name | orderBy : 'name'"
+			    data-ng-click="toggleLight(device)">
+				<td style="vertical-align: middle;">{{device.name}}</td>
+				<td width="30%">
+					<div data-ng-class="device.state ? 'toggle-button toggle-button-selected' : 'toggle-button'">
+						<button>
+							<i class="fa fa-lightbulb-o"></i>
+						</button>
+					</div>
+				</td>		
+			</tr>
+		</table>
+
+	</div>
+	
+</div>

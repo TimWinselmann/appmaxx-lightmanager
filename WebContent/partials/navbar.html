@@ -26,6 +26,18 @@
  					data-ui-sref="lights"> <i class="fa fa-lightbulb-o"></i>&nbsp;Lights
  				</a></li>
  				<li data-ui-sref-active="active"
+ 					data-ng-show="$state.current.name !== 'login'"><a
+ 					data-ui-sref="devices"> <i class="fa fa-television"></i>&nbsp;Devices
+ 				</a></li>
+ 				<li data-ui-sref-active="active"
+ 					data-ng-show="$state.current.name !== 'login'"><a
+ 					data-ui-sref="motors"> <i class="fa fa-cogs"></i>&nbsp;Motors
+ 				</a></li>
+ 				<li data-ui-sref-active="active"
+ 					data-ng-show="$state.current.name !== 'login'"><a
+ 					data-ui-sref="scenes"> <i class="fa fa-object-group"></i>&nbsp;Scenes
+ 				</a></li>
+ 				<li data-ui-sref-active="active"
  					data-ng-show="$state.current.name !== 'login'">
  					<a href="" data-ng-click="logout()" > <i class="fa fa-sign-out"></i>&nbsp;Logout
  				</a></li>

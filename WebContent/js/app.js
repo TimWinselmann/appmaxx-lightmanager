@@ -44,6 +44,42 @@ lightmanager.config(["$stateProvider", "$urlRouterProvider", function($stateProv
 		authenticate : true
 	});
 
+	$stateProvider.state('motors', {
+		url : '/motors',
+		views : {
+			'content@' : {
+				templateUrl : 'partials/motors.html',
+				controller : 'MotorsCtrl'
+			}
+		},
+		parent : 'root',
+		authenticate : true
+	});
+	
+	$stateProvider.state('devices', {
+		url : '/devices',
+		views : {
+			'content@' : {
+				templateUrl : 'partials/devices.html',
+				controller : 'DevicesCtrl'
+			}
+		},
+		parent : 'root',
+		authenticate : true
+	});
+	
+	$stateProvider.state('scenes', {
+		url : '/scenes',
+		views : {
+			'content@' : {
+				templateUrl : 'partials/scenes.html',
+				controller : 'ScenesCtrl'
+			}
+		},
+		parent : 'root',
+		authenticate : true
+	});
+	
 	$urlRouterProvider.otherwise('/login');
 	
 } ]);
@@ -65,3 +101,10 @@ lightmanager.run(['$rootScope', '$location', '$cookieStore', '$http', '$state', 
             }
         });
     }]);
+
+/* Collapse navigation bar on selection */
+$(document).on('click','.navbar-collapse.in',function(e) {
+    if( $(e.target).is('a') || $(e.target).is('i')) {
+        $(this).collapse('hide');
+    }
+});

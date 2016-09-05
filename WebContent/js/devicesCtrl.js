@@ -1,6 +1,6 @@
 var lightmanager = angular.module('lightmanagerApp');
 
-lightmanager.controller("LightsCtrl", [ "$rootScope", "$scope", "AppmaxxService", "$log", function($rootScope, $scope, AppmaxxService, $log) {
+lightmanager.controller("DevicesCtrl", [ "$rootScope", "$scope", "AppmaxxService", "$log", function($rootScope, $scope, AppmaxxService, $log) {
 
 	/* private initialization function */
 	function init() {
@@ -12,10 +12,10 @@ lightmanager.controller("LightsCtrl", [ "$rootScope", "$scope", "AppmaxxService"
 			$rootScope.$broadcast('error.message', response);
 		});
 		
-		AppmaxxService.getLights().then(function(response) {
+		AppmaxxService.getDevices().then(function(response) {
 			$log.info(response.data);
 			
-			$scope.lights = response.data;
+			$scope.devices = response.data;
 		}, function(response) {
 			$rootScope.$broadcast('error.message', response);
 		});

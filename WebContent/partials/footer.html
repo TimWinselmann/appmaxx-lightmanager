@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 
-<div>
-	<h3>FooterCtrl</h3>
-
-	<p data-ng-if="value">UserId: {{value.userId}} | CreatedAt: {{value.createdAt}}</p>
-</div>
+<footer>
+	<small data-ng-if="value">UserId: {{value.userId}} | CreatedAt: {{value.createdAt | date:'dd.MM.yyyy HH:mm'}}</small>
+</footer>
