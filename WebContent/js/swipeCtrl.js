@@ -8,14 +8,14 @@ lightmanager.controller("SwipeCtrl", [ "$scope", "$state", "$log", function($sco
 		var nextStateName = getNextState($state.$current.self.name);
 		$state.go(nextStateName);
 		
-		$('#navLights').collapse('hide');
+		$('.navbar-collapse.in').collapse('hide');
 	}
 	
 	$scope.swipeRight = function () {
 		var previousStateName = getPreviousState($state.$current.self.name);
 		$state.go(previousStateName);
 		
-		$('#navLights').collapse('hide');
+		$('.navbar-collapse.in').collapse('hide');
 	}
 	
 	function getPreviousState(currentStateName) {
