@@ -1,25 +1,28 @@
 <!DOCTYPE html>
-<div class="col-md-8 col-sm-10 col-sm-offset-1 col-md-offset-2">
+<div class="row show-grid">
 
-	<form data-ng-submit="login(credentials)">
-		<div class="form-group">
-			<label for="userId" class="control-label">User-ID</label> <input
-				type="text" placeholder="Please enter you User-ID"
-				data-ng-model="credentials.userId" required="required"
-				class="form-control" id="userId" name="userId">
-		</div>
-
-		<div class="form-group">
-			<label for="password" class="control-label">Password</label> <input
-				type="password" placeholder="Please enter your password"
-				data-ng-model="credentials.password" required="required"
-				class="form-control" id="password" name="password">
-		</div>
-
-		<input class="btn btn-primary btn-block" type="submit" id="loginBtn"
-			data-ng-disabled="!credentials.userId || !credentials.password"
-			value="Login" />
-	</form>
-
-	<p data-ng-if="value.userId">{{value.userId}} is logged in.</p>
+	<div class="col-md-8 col-sm-10 col-sm-offset-1 col-md-offset-2">
+	
+		<form data-ng-submit="login(credentials)">
+			<div class="form-group">
+				<label for="userId" class="control-label">User-ID</label> <input
+					type="text" placeholder="Please enter you User-ID"
+					data-ng-model="credentials.userId" required="required"
+					class="form-control" id="userId" name="userId">
+			</div>
+	
+			<div class="form-group">
+				<label for="password" class="control-label">Password</label> <input
+					type="password" placeholder="Please enter your password"
+					data-ng-model="credentials.password" required="required"
+					class="form-control" id="password" name="password">
+			</div>
+	
+			<input class="btn btn-primary btn-block" type="submit" id="loginBtn"
+				data-ng-disabled="!credentials.userId || !credentials.password"
+				value="Login" />
+		</form>
+	
+		<p data-ng-if="value.userId">{{value.userId}} is logged in.</p>
+	</div>
 </div>

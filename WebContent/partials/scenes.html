@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 
-<div class="col-xs-12 col-sm-4" data-ng-repeat="scene in scenes | orderBy : 'name'" >
-	
-	<div class="panel panel-default">
-	
-		<div class="panel-heading"
-		     data-ng-click="toggleScene(scene)">
-			<b>{{scene.name}}</b>
-			<div style="float: right;">
-				<div data-ng-class="scene.state ? 'toggle-button toggle-button-selected' : 'toggle-button'">
-					<button>
-						<i class="fa fa-lightbulb-o"></i>
-					</button>
-				</div>
-			</div>
-		</div>
-
-		<table class="table">
-			<tr data-ng-repeat="switch in scene.switches | orderBy : 'name'">
-				<td style="vertical-align: middle;">{{switch.name}}</td>
-				<td width="30%">
-					<div data-ng-class="light.state ? 'toggle-button toggle-button-selected' : 'toggle-button'">
+<div class="row show-grid">
+	<div class="col-xs-12 col-sm-4" data-ng-repeat="scene in scenes | orderBy : 'name'" >
+		
+		<div class="panel panel-default">
+		
+			<div class="panel-heading"
+			     data-ng-click="toggleScene(scene)">
+				<b>{{scene.name}}</b>
+				<div style="float: right;">
+					<div data-ng-class="scene.state ? 'toggle-button toggle-button-selected' : 'toggle-button'">
 						<button>
 							<i class="fa fa-lightbulb-o"></i>
 						</button>
 					</div>
-				</td>		
-			</tr>
-		</table>
-
-	</div>
+				</div>
+			</div>
 	
+			<table class="table">
+				<tr data-ng-repeat="switch in scene.switches | orderBy : 'name'">
+					<td style="vertical-align: middle;">{{switch.name}}</td>
+					<td width="30%">
+						<div data-ng-class="light.state ? 'toggle-button toggle-button-selected' : 'toggle-button'">
+							<button>
+								<i class="fa fa-lightbulb-o"></i>
+							</button>
+						</div>
+					</td>		
+				</tr>
+			</table>
+	
+		</div>
+		
+	</div>
 </div>
