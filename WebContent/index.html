@@ -14,15 +14,13 @@
 <link rel="stylesheet" href="css/toggle-button.css" />
 
 </head>
-<body class="ng-cloak">
+<body class="ng-cloak" data-ng-controller="SwipeCtrl">
 
 	<div data-ui-view data-name="navigation"></div>
 
-	<div class="container">
+	<div class="container" data-ng-swipe-left="swipeLeft();" data-ng-swipe-right="swipeRight();">
 
 		<div data-ui-view data-name=error></div>
-
-		<div data-ui-view data-name="header"></div>
 
 		<div data-ui-view data-name="content"></div>
 		
@@ -35,8 +33,12 @@
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-cookies.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-touch.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-animate.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
 	<script src="js/app.js"></script>
+	<script src="js/swipeCtrl.js"></script>
+	<script src="js/devicesCtrl.js"></script>
 	<script src="js/loginCtrl.js"></script>
 	<script src="js/errorCtrl.js"></script>
 	<script src="js/footerCtrl.js"></script>

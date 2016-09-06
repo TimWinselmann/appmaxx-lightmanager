@@ -1,4 +1,4 @@
-var lightmanager = angular.module('lightmanagerApp', [ 'ui.router', 'ngCookies' ]);
+var lightmanager = angular.module('lightmanagerApp', [ 'ui.router', 'ngCookies', 'ngTouch' ]);
 
 lightmanager.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
 
