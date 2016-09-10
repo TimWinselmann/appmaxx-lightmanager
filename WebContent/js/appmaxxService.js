@@ -1,18 +1,29 @@
 var lightmanager = angular.module('lightmanagerApp');
 
-var X_AUTH_TOKEN = 'X_AUTH_TOKEN';
+var httpAuthConfig;
+var TOKEN = 'TOKEN';
+var USER_ID = 'USER_ID';
+var CREATION_DATE = 'CREATION_DATE';
 
-lightmanager.factory("AppmaxxService", [ "$rootScope", "$http", "$cookies", "$log", function($rootScope, $http, $cookies, $log) {
+lightmanager.factory("AppmaxxService", [ "$rootScope", "$http", "$log", function($rootScope, $http, $log) {
 
-	var userData = $cookies.getObject(X_AUTH_TOKEN);
-	if (userData != undefined) {
-		var httpAuthConfig = {
-				headers:  {
-					'X-Auth-Token' : userData.token
-				}
+	var token = localStorage.getItem(TOKEN);
+	var userId = localStorage.getItem(USER_ID);
+	var creationDate = localStorage.getItem(CREATION_DATE);
+	
+	if (token != undefined && userId != undefined && creationDate != undefined) {
+		$log.info('Relogin: ' + userId);
+
+		httpAuthConfig = {
+			headers:  {
+				'X-Auth-Token' : token
+			}
 		};
-		/* TODO TW broadcast triggers before footer controller registers listener */
-		$rootScope.$broadcast('user-loogin', userData);
+		
+		var userData = {};
+		userData.userId = userId;
+		userData.creationDate = creationDate;
+		$rootScope.globals = userData;
 	}
 
 	function isEmpty(str) {
@@ -31,19 +42,29 @@ lightmanager.factory("AppmaxxService", [ "$rootScope", "$http", "$cookies", "$lo
 		},
 		logout : function() {
 			httpAuthConfig = undefined;
-			$cookies.remove(X_AUTH_TOKEN);
+
+			$rootScope.globals = undefined;
+			
+			localStorage.removeItem(TOKEN);
+			localStorage.removeItem(USER_ID);
+			localStorage.removeItem(CREATION_DATE);
 		},
         setUserData(userData) {
-			$cookies.putObject(X_AUTH_TOKEN, userData);
+			$log.info('Login: ' + userData.userId);
+			
+			localStorage.setItem(TOKEN, userData.token);
+			localStorage.setItem(USER_ID, userData.userId);
+			localStorage.setItem(CREATION_DATE, userData.createdAt);
 
 			httpAuthConfig = {
 				headers:  {
 					'X-Auth-Token' : userData.token
 				}
 			};
-
-			$log.info(userData.userId + " has logged in.");
-			$rootScope.$broadcast('user-loogin', userData);
+			
+			$rootScope.globals = {};
+			$rootScope.globals.userId = userId;
+			$rootScope.globals.creationDate = creationDate;
 		},
 		getRooms : function() {
 			return $http.get("https://appmaxx.selfhost.eu:32011/AppmaxxRESTService/rest/room", httpAuthConfig);

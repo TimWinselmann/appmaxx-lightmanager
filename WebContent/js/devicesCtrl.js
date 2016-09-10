@@ -9,7 +9,7 @@ lightmanager.controller("DevicesCtrl", [ "$rootScope", "$scope", "AppmaxxService
 			
 			$scope.rooms = response.data;
 		}, function(response) {
-			$rootScope.$broadcast('error.message', response);
+			$rootScope.$broadcast('backend.error', response);
 		});
 		
 		AppmaxxService.getDevices().then(function(response) {
@@ -17,7 +17,7 @@ lightmanager.controller("DevicesCtrl", [ "$rootScope", "$scope", "AppmaxxService
 			
 			$scope.devices = response.data;
 		}, function(response) {
-			$rootScope.$broadcast('error.message', response);
+			$rootScope.$broadcast('backend.error', response);
 		});
 	}
 	
@@ -29,7 +29,7 @@ lightmanager.controller("DevicesCtrl", [ "$rootScope", "$scope", "AppmaxxService
 		AppmaxxService.toggleLight(light).then(function(response) {
 			  $log.debug('Success toggleSwitch');
 		}, function(response) {
-			$rootScope.$broadcast('error.message', response);
+			$rootScope.$broadcast('backend.error', response);
 		});
   	}
 	

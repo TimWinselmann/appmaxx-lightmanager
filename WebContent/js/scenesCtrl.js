@@ -9,7 +9,7 @@ lightmanager.controller("ScenesCtrl", [ "$rootScope", "$scope", "AppmaxxService"
 			
 			$scope.scenes = response.data;
 		}, function(response) {
-			$rootScope.$broadcast('error.message', response);
+			$rootScope.$broadcast('backend.error', response);
 		});
 	}
 	
@@ -21,7 +21,7 @@ lightmanager.controller("ScenesCtrl", [ "$rootScope", "$scope", "AppmaxxService"
 		AppmaxxService.toggleScene(scene).then(function(response) {
 			  $log.debug('Success toggleSwitch');
 		}, function(response) {
-			$rootScope.$broadcast('error.message', response);
+			$rootScope.$broadcast('backend.error', response);
 		});
   	}
 	

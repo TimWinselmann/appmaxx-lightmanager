@@ -9,13 +9,15 @@ lightmanager.controller("LoginCtrl", [ "$rootScope", "$scope", "$state", "Appmax
 				/* got an authentication token, save it */
 				AppmaxxService.setUserData(response.data);
 				
+				// TODO TW Do every inital backend request here: Rooms, Lights, Devices, Scenes?
+				
 				$state.go('lights');
 			} else {
 				/* response does not contain authentication token... */
-				$rootScope.$broadcast('error.message', response);
+				$rootScope.$broadcast('backend.error', response);
 			}
 		}, function(response) {
-			$rootScope.$broadcast('error.message', response);
+			$rootScope.$broadcast('backend.error', response);
 		}).finally(function() {
 			 credentials.userId = '';
 			 credentials.password = '';

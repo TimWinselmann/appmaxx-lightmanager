@@ -2,7 +2,21 @@ var lightmanager = angular.module('lightmanagerApp');
 
 lightmanager.controller("ErrorCtrl", [ "$scope", "$log", "$timeout", function($scope, $log, $timeout) {
 
-	$scope.$on('error.message', function(event, value) {
+	$scope.$on('frontend.error', function(event, value) {
+		var errorMessage;
+		
+		errorMessage = value;
+		
+		$log.error('Error: ' + errorMessage);
+		$scope.errorMessage = errorMessage;
+
+		/* reset error message after 10 seconds */
+		$timeout(function() {
+			$scope.errorMessage = undefined;
+		}, 10000);
+	});
+	
+	$scope.$on('backend.error', function(event, value) {
 		var errorMessage;
 		
 		/* build error message from json response */
