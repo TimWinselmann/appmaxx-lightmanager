@@ -5,7 +5,7 @@ var TOKEN = 'TOKEN';
 var USER_ID = 'USER_ID';
 var CREATION_DATE = 'CREATION_DATE';
 
-lightmanager.factory("AppmaxxService", [ "$rootScope", "$http", "$log", function($rootScope, $http, $log) {
+lightmanager.factory("AppmaxxService", function($rootScope, $http, $log) {
 
 	var token = localStorage.getItem(TOKEN);
 	var userId = localStorage.getItem(USER_ID);
@@ -92,4 +92,4 @@ lightmanager.factory("AppmaxxService", [ "$rootScope", "$http", "$log", function
 			return $http.post("https://appmaxx.selfhost.eu:32011/AppmaxxRESTService/rest/scenes", scene, httpAuthConfig);
 		}
 	};
-} ]);
+});

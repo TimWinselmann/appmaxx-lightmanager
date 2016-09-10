@@ -1,6 +1,6 @@
 var lightmanager = angular.module('lightmanagerApp');
 
-lightmanager.controller("SwipeCtrl", [ "$scope", "$state", "$log", function($scope, $state, $log) {
+lightmanager.controller("SwipeCtrl", function($scope, $state, $log) {
 
 	var stateArray = [ 'lights', 'devices', 'motors', 'scenes' ];
 	
@@ -40,4 +40,4 @@ lightmanager.controller("SwipeCtrl", [ "$scope", "$state", "$log", function($sco
 		return stateArray[nextIndex];
 	}
 		
-} ]);
+});

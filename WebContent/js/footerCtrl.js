@@ -1,5 +1,5 @@
 var lightmanager = angular.module('lightmanagerApp');
 
-lightmanager.controller("FooterCtrl", [ "$scope", "$scope", function($rootScope, $scope) {
-
-} ]);
+lightmanager.controller("FooterCtrl", function($rootScope, $scope) {
+	/* nothing needed partial uses globals from rootScope */
+});

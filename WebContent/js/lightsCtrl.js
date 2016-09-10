@@ -1,6 +1,6 @@
 var lightmanager = angular.module('lightmanagerApp');
 
-lightmanager.controller("LightsCtrl", [ "$rootScope", "$scope", "AppmaxxService", "$log", function($rootScope, $scope, AppmaxxService, $log) {
+lightmanager.controller("LightsCtrl", function($rootScope, $scope, AppmaxxService, $log) {
 
 	/* private initialization function */
 	function init() {
@@ -22,7 +22,9 @@ lightmanager.controller("LightsCtrl", [ "$rootScope", "$scope", "AppmaxxService"
 	}
 	
 	$scope.$on('$stateChangeSuccess', function () {
-		init();
+		if ($scope.rooms == undefined) {
+			init();
+		}
 	});
 	
   	$scope.toggleLight = function(light) {
@@ -33,4 +35,4 @@ lightmanager.controller("LightsCtrl", [ "$rootScope", "$scope", "AppmaxxService"
 		});
   	}
 	
-} ]);
+});

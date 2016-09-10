@@ -1,6 +1,6 @@
 var lightmanager = angular.module('lightmanagerApp', [ 'ui.router', 'ngTouch' ]);
 
-lightmanager.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
+lightmanager.config(function($stateProvider, $urlRouterProvider) {
 
 	$stateProvider.state('root', {
 		url : '',
@@ -82,34 +82,33 @@ lightmanager.config(["$stateProvider", "$urlRouterProvider", function($stateProv
 	
 	$urlRouterProvider.otherwise('/login');
 	
-} ]);
+});
 
-lightmanager.run(['$rootScope', '$location', '$http', '$state', 'AppmaxxService', '$log',
-    function ($rootScope, $location, $http, $state, AppmaxxService, $log) {
+lightmanager.run(function ($rootScope, $location, $http, $state, AppmaxxService, $log) {
 //        //TODO keep user logged in after page refresh
 //        $rootScope.globals = $cookies.get('globals') || {};
 //        if ($rootScope.globals.currentUser) {
 //            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
 //        }
 
-        $rootScope.$on('$stateChangeStart', function (event, next, current) {
-        	var isLoggedIn = AppmaxxService.isLoggedIn();
-        	var nextStateName = next.name;
-        	
-        	/* Redirect to login page if not logged in */
-            if (nextStateName !== 'login' && !isLoggedIn) {
-            	event.preventDefault();
-            	$log.debug('Access to restricted state \'' + next.name + '\' --> redirecting to login page');
-            	$rootScope.$broadcast('frontend.error', 'Access to restricted resource denied. Please login.');
-            	$state.go('login');
-            /* Redirect to lights page if logged in */
-            } else if (nextStateName === 'login' && isLoggedIn) {
-            	event.preventDefault();
-            	$log.debug('Access to login page. User is alread logged in --> redirecting to lights');
-            	$state.go('lights');	
-            }
-        });
-    }]);
+    $rootScope.$on('$stateChangeStart', function (event, next, current) {
+    	var isLoggedIn = AppmaxxService.isLoggedIn();
+    	var nextStateName = next.name;
+    	
+    	/* Redirect to login page if not logged in */
+        if (nextStateName !== 'login' && !isLoggedIn) {
+        	event.preventDefault();
+        	$log.debug('Access to restricted state \'' + next.name + '\' --> redirecting to login page');
+        	$rootScope.$broadcast('frontend.error', 'Access to restricted resource denied. Please login.');
+        	$state.go('login');
+        /* Redirect to lights page if logged in */
+        } else if (nextStateName === 'login' && isLoggedIn) {
+        	event.preventDefault();
+        	$log.debug('Access to login page. User is alread logged in --> redirecting to lights');
+        	$state.go('lights');	
+        }
+    });
+});
 
 /* Collapse navigation bar on selection */
 $(document).on('click','.navbar-collapse.in',function(e) {

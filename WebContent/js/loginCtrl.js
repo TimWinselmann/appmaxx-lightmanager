@@ -1,6 +1,6 @@
 var lightmanager = angular.module('lightmanagerApp');
 
-lightmanager.controller("LoginCtrl", [ "$rootScope", "$scope", "$state", "AppmaxxService", "$log", function($rootScope, $scope, $state, AppmaxxService, $log) {
+lightmanager.controller("LoginCtrl", function($rootScope, $scope, $state, AppmaxxService, $log) {
 
 	$scope.login = function(credentials) {
 		AppmaxxService.login(credentials).then(function(response) {
@@ -24,4 +24,4 @@ lightmanager.controller("LoginCtrl", [ "$rootScope", "$scope", "$state", "Appmax
 		});
 	}
 
-} ]);
+});

@@ -1,6 +1,6 @@
 var lightmanager = angular.module('lightmanagerApp');
 
-lightmanager.controller("NavbarCtrl", [ "$rootScope", "$scope", "$state", "AppmaxxService", "$log", function($rootScope, $scope, $state, AppmaxxService, $log) {
+lightmanager.controller("NavbarCtrl", function($rootScope, $scope, $state, AppmaxxService, $log) {
 
 	$scope.$state = $state;
 	
@@ -10,4 +10,4 @@ lightmanager.controller("NavbarCtrl", [ "$rootScope", "$scope", "$state", "Appma
 		$rootScope.$broadcast('user-logout');
 		$state.go('login');
 	}
-}]);
+});

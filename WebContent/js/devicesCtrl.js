@@ -1,6 +1,6 @@
 var lightmanager = angular.module('lightmanagerApp');
 
-lightmanager.controller("DevicesCtrl", [ "$rootScope", "$scope", "AppmaxxService", "$log", function($rootScope, $scope, AppmaxxService, $log) {
+lightmanager.controller("DevicesCtrl", function($rootScope, $scope, AppmaxxService, $log) {
 
 	/* private initialization function */
 	function init() {
@@ -33,4 +33,4 @@ lightmanager.controller("DevicesCtrl", [ "$rootScope", "$scope", "AppmaxxService
 		});
   	}
 	
-} ]);
+});
