@@ -1,10 +1,7 @@
 body {
 	background-image: url(../img/background-pattern.gif);
+	padding-top: 70px;
 }
-
-/* .navbar { */
-/* 	border-radius: 0; */
-/* } */
 
 .panel-default {
 	box-shadow: 0px 5px 3px 0px rgba(0, 0, 0, 0.75);
