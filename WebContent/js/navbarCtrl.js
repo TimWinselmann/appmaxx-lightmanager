@@ -11,6 +11,10 @@ lightmanager.controller("NavbarCtrl", function($rootScope, $scope, $state, Appma
 		$state.go('login');
 	}
 	
+	$scope.reload = function() {
+		AppmaxxService.reload();
+	}
+	
 	$scope.$on('cfpLoadingBar:started', function(event, value) {
 		$log.debug('loading');
 		$scope.loading = true;

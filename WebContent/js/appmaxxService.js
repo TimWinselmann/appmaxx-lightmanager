@@ -70,51 +70,53 @@ lightmanager.factory("AppmaxxService", function($rootScope, $http, $log) {
 			/* toggle switch state */
 			scene.state = !scene.state;
 			return $http.post(BACKEND + 'scenes', scene, httpAuthConfig);
-		}
+		},
+		/* load backend information on application startup and publish to $rootScope */
+		init : function() {
+			service.getRooms().then(function(response) {
+				$log.info(response.data);
+				
+				$rootScope.rooms = response.data;
+			}, function(response) {
+				$rootScope.$broadcast('backend.error', response);
+			});
+			
+			service.getLights().then(function(response) {
+				$log.info(response.data);
+				
+				$rootScope.lights = response.data;
+			}, function(response) {
+				$rootScope.$broadcast('backend.error', response);
+			});
+			
+			service.getDevices().then(function(response) {
+				$log.info(response.data);
+				
+				$rootScope.devices = response.data;
+			}, function(response) {
+				$rootScope.$broadcast('backend.error', response);
+			});
+			
+			service.getMotors().then(function(response) {
+				$log.info(response.data);
+				
+				$rootScope.motors = response.data;
+			}, function(response) {
+				$rootScope.$broadcast('backend.error', response);
+			});
+			
+			service.getScenes().then(function(response) {
+				$log.info(response.data);
+				
+				$rootScope.scenes = response.data;
+			}, function(response) {
+				$rootScope.$broadcast('backend.error', response);
+			});
+		},
+		reload : function() {
+			service.init();
+		} 
 	};
-	
-	/* load backend information on application startup and publish to $rootScope */
-	function init() {
-		service.getRooms().then(function(response) {
-			$log.info(response.data);
-			
-			$rootScope.rooms = response.data;
-		}, function(response) {
-			$rootScope.$broadcast('backend.error', response);
-		});
-		
-		service.getLights().then(function(response) {
-			$log.info(response.data);
-			
-			$rootScope.lights = response.data;
-		}, function(response) {
-			$rootScope.$broadcast('backend.error', response);
-		});
-		
-		service.getDevices().then(function(response) {
-			$log.info(response.data);
-			
-			$rootScope.devices = response.data;
-		}, function(response) {
-			$rootScope.$broadcast('backend.error', response);
-		});
-		
-		service.getMotors().then(function(response) {
-			$log.info(response.data);
-			
-			$rootScope.motors = response.data;
-		}, function(response) {
-			$rootScope.$broadcast('backend.error', response);
-		});
-		
-		service.getScenes().then(function(response) {
-			$log.info(response.data);
-			
-			$rootScope.scenes = response.data;
-		}, function(response) {
-			$rootScope.$broadcast('backend.error', response);
-		});
-	}
 	
 	var token = localStorage.getItem(TOKEN);
 	var userId = localStorage.getItem(USER_ID);
@@ -134,7 +136,7 @@ lightmanager.factory("AppmaxxService", function($rootScope, $http, $log) {
 		userData.creationDate = creationDate;
 		$rootScope.globals = userData;
 		
-		init();
+		service.init();
 	}
 	
 	return service;
