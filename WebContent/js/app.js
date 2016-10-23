@@ -1,7 +1,9 @@
-var lightmanager = angular.module('lightmanagerApp', [ 'ui.router', 'ngTouch' ]);
+var lightmanager = angular.module('lightmanagerApp', [ 'ui.router', 'ngTouch', 'ngAnimate', 'angular-loading-bar' ]);
 
-lightmanager.config(function($stateProvider, $urlRouterProvider) {
+lightmanager.config(['$stateProvider', '$urlRouterProvider', 'cfpLoadingBarProvider', function($stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
 
+	cfpLoadingBarProvider.includeSpinner = false;
+	 
 	$stateProvider.state('root', {
 		url : '',
 		abstract : true,
@@ -82,7 +84,7 @@ lightmanager.config(function($stateProvider, $urlRouterProvider) {
 	
 	$urlRouterProvider.otherwise('/login');
 	
-});
+}]);
 
 lightmanager.run(function ($rootScope, $location, $http, $state, AppmaxxService, $log) {
 //        //TODO keep user logged in after page refresh
